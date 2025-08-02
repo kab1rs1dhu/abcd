@@ -1,0 +1,31 @@
+# Git
+.git
+.gitignore
+
+# Build artifacts
+target/
+!target/*.jar
+
+# Logs
+logs/
+*.log
+
+# IDE specific files
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.project
+.settings/
+.classpath
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~.nib
+
+# OS specific files
+.DS_Store
+Thumbs.db 

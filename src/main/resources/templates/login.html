@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love ❤️</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff0f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .login-container {
+            background-color: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(255, 182, 193, 0.3);
+            text-align: center;
+            width: 80%;
+            max-width: 350px;
+        }
+        h1 {
+            color: #ff80ab;
+            margin-bottom: 30px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ffcdd2;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            background-color: #ff80ab;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin-top: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff4081;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff80ab;
+            transform: rotate(45deg);
+            opacity: 0;
+            animation: fall 5s linear infinite;
+        }
+        .heart::before, .heart::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background-color: #ff80ab;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+        .heart::after {
+            top: 0;
+            left: -10px;
+        }
+        @keyframes fall {
+            0% {
+                top: -10%;
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
+        }
+        .error {
+            color: #ff4081;
+            margin-top: 10px;
+            display: none;
+        }
+        @keyframes shake {
+            0%, 100% {transform: translateX(0);}
+            10%, 30%, 50%, 70%, 90% {transform: translateX(-5px);}
+            20%, 40%, 60%, 80% {transform: translateX(5px);}
+        }
+        .shake {
+            animation: shake 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Welcome, My Love</h1>
+        <div>
+            <input type="password" id="password" placeholder="Enter our special password..." autofocus>
+            <div id="error-message" class="error">That's not it, try again!. Hint: I call you this multiple times a day</div>
+            <button onclick="checkPassword()">Enter ❤️</button>
+        </div>
+    </div>
+
+    <script>
+        // Create heart animations
+        function createHearts() {
+            const body = document.querySelector('body');
+            const heartCount = 20;
+            
+            for (let i = 0; i < heartCount; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.animationDelay = Math.random() * 5 + 's';
+                    heart.style.opacity = Math.random();
+                    body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 5000);
+                }, i * 300);
+            }
+            
+            setTimeout(createHearts, 7000);
+        }
+        
+        createHearts();
+        
+        // Password check
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+            const container = document.querySelector('.login-container');
+            
+            // Set your password here
+            if (password === "meepubaby" || password == "meepu baby") {
+                // Success animation
+                container.style.transition = 'all 0.8s ease-out';
+                container.style.transform = 'scale(1.1)';
+                container.style.opacity = '0';
+                
+                setTimeout(() => {
+                    window.location.href = "/main";
+                }, 800);
+            } else {
+                errorMessage.style.display = "block";
+                container.classList.add('shake');
+                setTimeout(() => {
+                    errorMessage.style.display = "none";
+                    container.classList.remove('shake');
+                }, 800);
+            }
+        }
+        
+        // Allow Enter key to submit
+        document.getElementById('password').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                checkPassword();
+            }
+        });
+    </script>
+</body>
+</html> 
